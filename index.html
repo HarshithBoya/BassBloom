@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BassBloom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+html, body {
+  overflow-x: hidden;
+}
+    
+    html{
+        scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Sora', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    strong{
+        background: linear-gradient(90deg, #ff00cc, #3333ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(0, 0, 0, 0.3);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+    nav h2 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 0 8px;
+      margin-right: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      padding : 8px 12px;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+      font-size:20px;
+    }
+
+nav a:hover {
+  background: rgb(255, 0, 204);
+  border-radius: 5px;
+}
+/* Default hamburger menu (hidden on desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: -30px;
+  margin-right: -20px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 16px;         /* Reduce padding */
+    min-height: auto;          /* Ensure it doesn't stay tall */
+    height: 75px;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  nav div {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #1f1f2e;
+  }
+
+  nav.show div {
+    display: flex;
+  }
+
+  nav div a,
+  nav .dropdown {
+    margin: 10px 0;
+    width: 100%;
+  }
+}
+ .dropdown.open .dropdown-content {
+    display: block;
+    position: static;
+    background-color: #1f1f2e;
+    margin-top: 10px;
+    box-shadow: none;
+  }
+    .dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    color: white;
+    background-color: #1f1f2e;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  .dropdown-content a:hover {
+    background-color: #ff00cc;
+  }
+/* Hover for large screens only */
+@media (min-width: 769px) {
+  nav .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}
+
+/* Mobile-specific toggle */
+@media (max-width: 768px) {
+  nav .dropdown.open .dropdown-content {
+    display: block;
+    position: static;
+    background-color: #1f1f2e;
+    margin-top: 10px;
+    box-shadow: none;
+  }
+
+  nav .dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    color: white;
+    background-color: #1f1f2e;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  nav .dropdown-content a:hover {
+    background-color: #ff00cc;
+  }
+}
+  #logoutBtn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+
+
+
+#login{
+  background-color: #fff;
+  color: #ff00cc;
+  font-size:18px;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+}
+    .hero {
+        background-image:url(heroimage.jpg);
+        background-size: cover;
+        background-repeat:no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      padding: 0 2rem;
+    }
+   
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.08;
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ff00cc; }
+      100% { text-shadow: 0 0 20px #3333ff; }
+    }
+    p {
+      font-size: 1.4rem;
+      margin: 1.2rem 0;
+      opacity: 0.9;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      font-size: 1rem;
+      background: #ff00cc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #e600b8;
+    }
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .music-section {
+      background-color: #0e0e1a;
+    }
+    .music-section h2,
+    .about-section h2,
+    .contact-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    audio {
+      margin-top: 1rem;
+      width: 80%;
+      max-width: 600px;
+    }
+    #about {
+      background-color: #0e0e1a;
+      color: white;
+      padding: 80px 20px;
+      font-family: 'Poppins', sans-serif;
+    
+    }
+
+    .about-section{
+      background: #1f1f2e; 
+      padding: 25px; 
+      border-radius: 12px;
+      font-size:16px;
+    }
+
+    .about-section p{
+      font-size:13px;
+    }
+
+    .about-section h3{
+      text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+  #about h2 {
+    font-size: 28px;
+  }
+  #about p {
+    font-size: 16px;
+  }
+}
+
+  .hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+  }
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+    .contact-section {
+      background-color: #13131e;
+    }
+
+    .service-card {
+    background: #383847;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  .service-card img {
+  width: 51%;
+  height: 125.3%; 
+  object-fit: cover;
+  border-radius: 12px;
+}
+@media (max-width: 768px) {
+    .service-card{
+     background: #383847;
+    border-radius:20px;
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  .service-card img {
+     width: 67%;
+     height: 125.3%; 
+    max-height: 500px;
+  }
+    #extra-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+  
+}
+
+}
+.animate {
+    animation: bordure 2s cubic-bezier(0.8, 0.3, 0.41, 1.05) 1s forwards;
+}
+
+
+
+  @keyframes bordure {
+      0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      50% {
+        width: 500px;
+        height: 0px;
+      }
+
+      100% {
+        width: 500px;
+        height: 287px;
+        opacity: 1;
+      }
+    }
+  .service-card p{
+    font-size: 12px;
+    color:#cec8c8;
+  }
+
+  #extra-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+  
+}
+ .hidden-card {
+    display: none;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(223, 4, 106);
+  }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      border: none;
+      background: #262640;
+      color: white;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #ccc;
+    }
+    button {
+      padding: 0.8rem 1.6rem;
+      background: #ff00cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e600b8;
+    }
+    /* footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #0e0e1a;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    } */
+    /* Social icons */
+    .social-icons {
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      display: inline-block;
+      color: white;
+      font-size: 1.3rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      color: #ff00cc;
+    }
+
+    footer {
+      background-color: #0e0e1a;
+      padding: 4rem 2rem;
+      color: #fff;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-section {
+      flex: 1 1 560px;
+      justify-content: space-between;
+    }
+    .footer-section p{
+      font-size: 14px;
+    }
+
+    .footer-section h3{
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      border-top: 1px solid #444;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+    }
+   /* Dropdown for nav Services */
+  nav .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  nav .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1f1f2e;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 8px;
+  }
+
+  nav .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+  }
+
+  nav .dropdown-content a:hover {
+    background-color: #ff00cc;
+  }
+
+  nav .dropdown:hover .dropdown-content {
+    display: block;
+  }
+   @media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; }
+  .nav-links.show { display: flex; }
+  .dropdown-content { display: none; }
+  .dropdown-content.show { display: block; position: static; }
+}
+
+  
+  </style>
+  <!-- FontAwesome for social icons -->
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+   <!-- --------------------------navbar------------------------------- -->
+
+<nav>
+  <h2>Bass<strong>Bloom</strong></h2>
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  <div class="nav-links" id="navLinks">
+    <a href="#music">Music</a>
+    <a href="#about">About</a>
+   <div class="dropdown">
+  <a href="#hero" class="dropdown-toggle" onclick="toggleDropdown(event)" >Explore ▾</a>
+  <div class="dropdown-content">
+    <a href="team.html">Team</a>
+    <a href="#Services">Services</a>
+    <a href="events.html">Events</a>
+  </div>
+   </div>
+
+    <a href="#contact">Contact</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="login.html" id="login">Login</a>
+    <span id="welcomeText" style="margin-left: 15px; font-weight: bold; font-size: 18px;"></span>
+<img id="userpic" style="width: 40px; height: 40px; border-radius: 50%; display: none; margin-left: 10px; margin-right: 20px; " />
+<button onclick="logout()" style="padding: 6px 12px; border-radius: 6px; background-color: crimson; color: white; border: none; cursor: pointer; display: none; " id="logoutBtn">
+  Logout
+</button>
+  </div>
+</div>
+</nav>
+
+
+
+<!-- ---------------------------Home---------------------------------- -->
+
+  <section class="hero">
+    <div class="content">
+        
+      <h1>BassBloom</h1>
+      <p>Where Emotion Blossoms Through Sound</p>
+      <a href="#music" class="btn">Listen Now</a>
+    </div>
+  </section>
+<!-- -------------------------Music-------------------------------------- -->
+
+ <section id="music" class="music-section" style="padding: 60px 20px; background: #0e0e1a;">
+  <div style="max-width: 800px; margin: auto; text-align: center;">
+    <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">🎶 Featured Track</h2>
+    <p style="font-family: 'Poppins', sans-serif; color: #bbb; margin-bottom: 30px;">
+      Dive into the cinematic vibes of our latest release — an emotional blend of beats and soul.
+    </p>
+
+    <div style="background: #1f1f2e; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+      <img  src="featuredpic.jpg" alt="Album Art" style="width: 180px; height: 180px; border-radius: 12px; object-fit: cover; border-color:#ff00cc; ">
+
+      <div style="text-align: center;">
+        <h3 style="color: #ff00cc; margin: 0;">Soul Drift</h3>
+        <p style="margin: 5px 0; color: #ccc; font-size: 14px;">Genre: Chillwave · Duration: 4:00  · Released: May 2025</p>
+        <p style="font-size: 13px; color: #aaa; max-width: 600px;">
+          "Let your soul wander with the rhythm — this track captures our purest expression of emotion and energy."
+        </p>
+      </div>
+
+      <audio controls style="width: 100%; max-width: 600px;">
+        <source src="featuredmusic.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <div style="margin-top: 10px;">
+        <button onclick="shareTrack()" style="background: #ff00cc; border: none; color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer;">🔗 Share</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function shareTrack() {
+      const url = window.location.href + "#music";
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Track link copied to clipboard!");
+      });
+    }
+  </script>
+</section>
+
+<!-- ---------------------About-------------------------------------- -->
+
+  <section id="about">
+  <div style="max-width: 1000px; margin: auto; text-align: center;">
+    <h2 class="fade-in" style="font-size: 36px; margin-bottom: 20px;">About Bass<strong>Bloom</strong></h2>
+    <p style="font-size: 18px; color: #ccc; line-height: 1.6;">
+      BassBloom isn’t just a band — it’s an experience. We’re a collective of passionate musicians, sound engineers, and creators on a mission to fuse emotion with rhythm, and tradition with innovation.
+    </p>
+    <p style="font-size: 18px; color: #ccc; margin-top: 20px; line-height: 1.6;">
+      Born from jam sessions and late-night studio sparks, BassBloom has grown into a force of musical storytelling. Whether it's electrifying live shows, heart-thumping DJ sets, or soulful studio creations — we bring pure energy to every beat.
+    </p>
+
+    <div style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left;">
+      <div class="about-section" >
+        <h3 style="color: #ff00cc;">🎶Our Vision</h3>
+        <p style="color: #bbb;">To build a global music culture that breaks boundaries and speaks to the soul — one bass drop at a time.</p>
+      </div>
+      <div class="about-section">
+        <h3 style="color: #00ffe1;">🤝Our Vibe</h3>
+        <p style="color: #bbb;">Collaboration. Creativity. Community. From fans to fellow artists, we believe in growing together.</p>
+      </div>
+      <div class="about-section">
+        <h3 style="color: #ffd700;">🌍Our Reach</h3>
+        <p style="color: #bbb;">From local venues to virtual stages, we’ve touched hearts across the globe — and we’re just getting started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <!-- --------------------Services-------------------------- -->
+
+  </section>
+<section id="Services" class="services-section" style="background: #0e0e1a; color: white; padding: 60px 20px; font-family: 'Poppins', sans-serif;">
+  <div style="max-width: 1000px; margin: auto; text-align: center;">
+    <h2 style="font-size: 36px; margin-bottom: 20px;">🎵 Our Services</h2>
+    <p style="font-size: 18px; color: #aaa; margin-bottom: 40px;">
+      Crafted with emotion. Fused with creativity. Delivered with passion.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+      <div class="service-card">
+        <h3>🎤 Live Performances</h3>
+        <div class="animate">
+                     <img src="liveperformance.webp" alt="liveperformance">
+                    </div>
+        <p>Bring the BassBloom experience to your stage — from intimate sets to high-energy concerts</p>
+      </div>
+
+      <div class="service-card">
+        <h3>🎛️ Music Production</h3>
+         <div class="animate">
+                     <img src="musicproduction.jpg" alt="musicproduction">
+                    </div>
+        <p>From beat-making to mastering — we craft custom tracks tailored to your vision.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>🎧 Studio Sessions</h3>
+        <div class="animate">
+                     <img src="studiosession.jpg" alt="studiosession">
+                    </div>
+        <p>Book time with our sound engineers and record in a pro-grade setup.</p>
+      </div>
+     </div>
+  </div>
+   <div id="extra-services" class="hidden-services">
+        <div class="service-card hidden-card">
+          <h3>🎼 Custom Jingles</h3>
+        <div class="animate">
+                     <img src="CustomJingles.jpg" alt="CustomJingles">
+                    </div>
+          <p>Need a track for your ad, podcast, or short film? We’ve got you covered.</p>
+        </div>
+
+        <div class="service-card hidden-card">
+         <h3>Collaborations</h3>
+          <div class="animate">
+                     <img src="Collaboration.avif" alt="Collaborations">
+                    </div>
+          <p>Looking to team up? Let’s create something powerful together.</p>
+        </div>
+
+        <div class="service-card hidden-card">
+          <h3>Workshops</h3>
+            <div class="animate">
+                     <img src="Workshop.jpg" alt="Workshop">
+                    </div>
+          <p>Learn production, sound design, and DAW magic from the BassBloom crew.</p>
+        </div>
+        <div class="service-card hidden-card">
+          <h3>DJ Sets & Event Sound</h3>
+          <div class="animate">
+                     <img src="dj.avif" alt="DJ sets & Event Sound">
+                    </div>
+          <p>High-energy DJ performances for parties, festivals, and special events.</p>
+        </div>
+    </div>
+<div style="text-align: center; margin-top: 30px;">
+  <button id="toggleButton" style="padding: 10px 20px; background: #ff00cc; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    See More
+  </button>
+</div>
+
+
+</section>
+<!-- -------------------------------Contact--------------------------- -->
+
+  <section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <form id="contact-form">
+      <input type="text" name="user_name" placeholder="Your Name" required />
+      <input type="email" name="user_email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <!-- --------------------------Footer----------------------------------- -->
+
+   <footer>
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3>Sub<strong>scribe</strong></h3>
+        <p>Get new soundscapes, exclusive content, and behind-the-scenes.</p>
+        <form id="newsletter-form">
+  <input type="email" name="email" placeholder="Enter your email" required style="width:100%; padding: 0.5rem; border:none; border-radius:5px; background:#1c1c2b; color:#fff;"/>
+  <button type="submit" style="margin-top:0.5rem; padding:0.5rem 1rem; border:none; border-radius:5px; background:#ff00cc; color:white;">Subscribe</button>
+</form>
+      </div>
+      <div class="footer-section">
+        <h3>Contact<strong> Info</strong></h3>
+        <p><i class="fa-solid fa-location-dot"></i><b> Location:</b> Bass Bloom,<br> Hyderabad, India</p>
+        <p><b><i class="fa-solid fa-phone"></i>  Phone: </b>  +91 83740 98489</p>
+        <p><b><i class="fa-solid fa-envelope"></i>  Email:</b> bassbloommusic@gmail.com</p>
+        <p>Stay connected with us for the latest soundscapes, exclusive tracks, and behind-the-scenes stories.</p>
+        <p>Follow us on social media for updates and releases.</p>
+        <div class="social-icons">
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Latest<strong> Vibes</strong></h3>
+        <p>🎵 New single "Soul Drift" out now!</p>
+        <p>🎧 Working on our next cinematic EP...</p>
+        <p>5K+ streams on BloomTide – thank you!</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 BassBloom. All rights reserved. | Designed by Harshith
+    </div>
+  </footer>
+
+  <script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+      name: form.user_name.value,
+      email: form.user_email.value,
+      message: form.message.value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbz0EqMT4YvoQ1zOQwfv31rUrjLsfxUXFWXRiH84YoF7-kCDskbMTPz3-igOJtueIiFNaw/exec", {
+  method: "POST",
+  mode: "no-cors", // CORS bypass
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: form.user_name.value,
+    email: form.user_email.value,
+    message: form.message.value
+  })
+})
+.then(() => {
+  alert("Message sent successfully!");
+  form.reset();
+})
+.catch(() => {
+  alert("Something went wrong. Please try again.");
+});
+
+  });
+</script> 
+<script>
+  document.getElementById("newsletter-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = e.target.email.value;
+    fetch("https://script.google.com/macros/s/AKfycbxPurZBPU8NagGQ7uzumBxu_k--_X2uz3B5wcY_Efixpa1NqGvZpBy5fgoyl0cZv0ZWzA/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email })
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Thank you for subscribing!");
+    })
+    .catch(err => {
+      alert("Error: " + err);
+    });
+  });
+</script>
+<script>
+  document.getElementById("see-more-btn").addEventListener("click", function () {
+    const extra = document.getElementById("extra-services");
+    if (extra.style.display === "none" || extra.style.display === "") {
+      extra.style.display = "grid";
+      this.textContent = "See Less";
+    } else {
+      extra.style.display = "none";
+      this.textContent = "See More";
+    }
+  });
+</script>
+
+<script>
+  const toggleBtn = document.getElementById('toggleButton');
+  const hiddenCards = document.querySelectorAll('.hidden-card');
+  let isExpanded = false;
+
+  toggleBtn.addEventListener('click', () => {
+    hiddenCards.forEach(card => {
+      card.style.display = isExpanded ? 'none' : 'block';
+    });
+    toggleBtn.textContent = isExpanded ? 'See More' : 'See Less';
+    isExpanded = !isExpanded;
+  });
+</script>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  });
+
+  document.querySelectorAll('#about .fade-in').forEach(el => {
+    el.classList.add('hidden');
+    observer.observe(el);
+  });
+</script>
+
+<script>
+  
+  // Check if user is signed in
+  const name = localStorage.getItem("username");
+    const photo = localStorage.getItem("userpic");
+
+  const loginLink = document.getElementById("login");
+  const welcomeText = document.getElementById("welcomeText");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const userpic = document.getElementById("userpic");
+
+
+  if (!name) {
+    // Not logged in
+    window.location.href = "login.html";
+    loginLink.style.display = "inline-block";
+    welcomeText.style.display = "none";
+    logoutBtn.style.display = "none";
+  } else {
+    // Logged in
+    welcomeText.innerText = "Welcome, " + name + " 👋";
+    welcomeText.style.display = "inline-block";
+    logoutBtn.style.display = "inline-block";
+    loginLink.style.display = "none";
+  
+
+  if (photo) {
+      userpic.src = photo;
+      userpic.style.display = "inline-block";
+    }
+  }
+  
+  function logout() {
+    localStorage.clear();
+    window.location.href = "signup.html"; // or login.html
+  }
+  
+</script>
+
+
+<script>
+  function toggleMenu() {
+    const nav = document.querySelector("nav");
+    nav.classList.toggle("show");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.closest(".dropdown");
+
+    // Toggle dropdown on click (only on mobile)
+    dropdownToggle.addEventListener("click", function (e) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        dropdown.classList.toggle("open");
+      }
+    });
+
+    // Close nav and dropdown on any nav link click
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", function () {
+        document.querySelector("nav").classList.remove("show");
+        dropdown.classList.remove("open");
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (e) {
+      if (!dropdown.contains(e.target) && !dropdownToggle.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+  function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
+function toggleDropdown(e) {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    document.getElementById("dropdownContent").classList.toggle("show");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        document.getElementById("navLinks").classList.remove("show");
+        document.getElementById("dropdownContent").classList.remove("show");
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+</body>
+</html>

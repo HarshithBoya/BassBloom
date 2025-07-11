@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BassBloom | Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth-style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<style>
+  html, body {
+  overflow-x: hidden;
+}
+
+ .remember-me {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 15px 0;
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  color: white;
+  gap: 8px;
+}
+.remember-me input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  accent-color: #ff007a; /* optional: matches your pink button */
+  cursor: pointer;
+}
+
+.remember-me label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  line-height: 1.4;
+}
+/* General wrapper */
+.page-wrapper {
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+
+/* Inputs */
+input, button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .auth-container {
+    padding: 1rem;
+    
+  }
+
+  .remember-me {
+    font-size: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remember-me label {
+    line-height: 1.4;
+  }
+
+  .footer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
+
+</style>
+<body class="auth-body">
+  <div class="page-wrapper">
+    <main>
+      <div class="auth-container">
+        <h2>Create Your Bass<strong>Bloom</strong>Account</h2>
+            <form id="manualSignupForm">
+            <input type="text" id="fullname" placeholder="Full Name" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <input type="password" id="password" placeholder="Password" required>
+          <input type="password"  id="confirmPassword"  placeholder="Confirm Password" required>
+         <div class="checkbox-container">
+            <div class="remember-me">
+              <label>
+               <input type="checkbox" id="remember" />
+                 I agree to <b>Terms of use & Privacy Policy</b>
+              </label>
+            </div>
+</div>
+
+          <button type="submit">Signup</button>
+          
+
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © 2025 BassBloom. All rights reserved. | Designed by Harshith
+    </footer>
+  </div>
+  <script>
+  function handleCredentialResponse(response) {
+    const data = jwt_decode(response.credential);
+    document.getElementById("user-info").innerText = `Welcome, ${data.name}`;
+    console.log("User logged in:", data);
+    // Optionally send token to backend here
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+<script>
+  function handleCredentialResponse(response) {
+    const data = jwt_decode(response.credential);
+
+    // Store user info
+    localStorage.setItem("username", data.name);
+    localStorage.setItem("useremail", data.email);
+    localStorage.setItem("userpic", data.picture); // optional: profile pic
+
+    // Redirect to main page
+    window.location.href = "index.html";
+  }
+</script>
+<script>
+
+  // JWT decode helper function
+  function parseJwt(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+    localStorage.setItem("username", data.name);
+localStorage.setItem("email", data.email);
+
+  }
+</script>
+<script>
+  document.getElementById("manualSignupForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const agreed = document.getElementById("remember").checked;
+
+    // Basic validation
+    if (!fullName || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    if (!agreed) {
+      alert("You must agree to the Terms and Privacy Policy.");
+      return;
+    }
+
+    // Save to localStorage
+    const user = {
+      name: fullName,
+      email: email,
+      password: password, // You can hash it for real apps
+    };
+
+    localStorage.setItem("manualUser", JSON.stringify(user));
+    alert("Signup successful! Redirecting to login...");
+    window.location.href = "login.html";
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BassBloom | Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth-style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+  <style>
+     html, body {
+  overflow-x: hidden;
+}
+    .auth-container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    #loginForm{
+      margin-top: 20px;
+      color: black;
+    }
+    .remember-me {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      color: white;
+    }
+
+    .remember-me input[type="checkbox"] {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      accent-color: #ff007a;
+      cursor: pointer;
+    }
+
+    .remember-me label {
+      display: flex;
+      cursor: pointer;
+      margin-right: 120px;
+    }
+  </style>
+
+  <script>
+    // Redirect if already logged in
+    if (localStorage.getItem("username")) {
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+
+<body class="auth-body">
+  <div class="page-wrapper">
+    <main>
+      <div class="auth-container">
+        <h2>Welcome Back to Bass<strong>Bloom</strong></h2>
+
+        <!-- Google Sign-In -->
+        <div id="g_id_onload"
+             data-client_id="949300038099-jrf9emcd5v290gbik87m8hf86vmtp4t1.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse"
+             data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="outline"
+             data-text="signin_with"
+             data-size="large"
+             data-logo_alignment="left">
+        </div>
+
+        <!-- Manual Login Form -->
+        <form id="loginForm">
+          <input type="email" placeholder="Email" id="loginEmail" required />
+          <input type="password" placeholder="Your Password" id="loginPassword" required />
+
+          <div class="remember-me">
+            <label for="remember">
+              <input type="checkbox" id="remember" /> Remember Me
+            </label>
+          </div>
+
+          <button type="submit">Login</button>
+          <a href="index.html">Back</a>
+        </form>
+
+        <p>Don't have an account? <a href="signup.html">Signup</a></p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © 2025 BassBloom. All rights reserved. | Designed by Harshith
+    </footer>
+  </div>
+
+  <!-- Google Sign-In Handler -->
+  <script>
+    function handleCredentialResponse(response) {
+      const data = jwt_decode(response.credential);
+
+      localStorage.setItem("username", data.name);
+      localStorage.setItem("useremail", data.email);
+      localStorage.setItem("userpic", data.picture);
+
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <!-- Manual Login Handler -->
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const enteredEmail = document.getElementById("loginEmail").value.trim();
+      const enteredPassword = document.getElementById("loginPassword").value;
+
+      const savedUser = JSON.parse(localStorage.getItem("manualUser"));
+
+      if (!savedUser) {
+        alert("No account found. Please sign up first.");
+        return;
+      }
+
+      if (enteredEmail === savedUser.email && enteredPassword === savedUser.password) {
+        localStorage.setItem("username", savedUser.name);
+        window.location.href = "index.html";
+      } else {
+        alert("Invalid email or password.");
+      }
+    });
+  </script>
+  <!-- Callback JavaScript -->
+<script>
+  function handleCredentialResponse(response) {
+    const data = jwt_decode(response.credential);
+    localStorage.setItem("username", data.name);
+    localStorage.setItem("useremail", data.email);
+    localStorage.setItem("userpic", data.picture);
+
+    // Redirect after sign in
+    window.location.href = "index.html";
+  }
+</script>
+  
+</body>
+</html>
